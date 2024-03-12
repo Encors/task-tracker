@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="saveTask()">
+  <mat-form-field>
+    <input matInput placeholder="Заголовок" formControlName="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Название" formControlName="content" />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      placeholder="Дедлайн"
+      formControlName="deadline"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker" />
+    <mat-datepicker #picker />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Приоритет" formControlName="priority">
+      @for (priority of priorities; track $index) {
+        <mat-option [value]="priority">{{ priority }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Статус" formControlName="status">
+      @for (status of statuses; track $index) {
+        <mat-option [value]="status">{{ status }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Исполнитель" formControlName="executor" />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!form.valid"
+  >
+    Создать задачу
+  </button>
+</form>
